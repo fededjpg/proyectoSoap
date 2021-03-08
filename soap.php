@@ -1,3 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Resultado</title>
+</head>
+<style>
+    body {
+        background-color: #E4EAFF;
+    }
+</style>
+
+<body>
+
 <?php
 
 /**defenimos la uri donde haremos la consulta de los datos */
@@ -10,29 +28,30 @@ $a = isset($_POST['a']) ? $_POST['a'] : '';
 $option = isset($_POST['select']) ? $_POST['select'] : '';
 
 
+
 switch ($option) {
      /** validamos la seleccion del usuario, si elige Fahrenheit 
       * entrara a esta opcion
      */
     case 'Fahrenheit':
         # code...
-         /**validamos si lo que nos envio el usuario no es un dato de tipo
-          * string,y si esta condicion se cumple nos regresara al
-          *index
-          */
-        if (!is_string($option)) {
-            header('Location:http://soap.test?result=error');
-            die();
-        }
-        /**validamos si lo que nos envio el usuario no es un dato de tipo
-          * numerico, y si esta condicion se cumple nos regresara al
-          *index
-          */
-        if (!is_numeric($a)) {
-            header('Location:http://soap.test?result=errora');
-            die();
-        }
-         /**una vez que haya pasado nuestra validacion nuestra variable request_param
+            /**validamos si lo que nos envio el usuario no es un dato de tipo
+                 * string,y si esta condicion se cumple nos regresara al
+                 *index
+                 */
+           if (!is_string($option)) {
+               header('Location:http://soap.test?result=error');
+               die();
+           }
+                   /**validamos si lo que nos envio el usuario no es un dato de tipo
+                 * numerico, y si esta condicion se cumple nos regresara al
+                 *index
+                 */
+           if (!is_numeric($a)) {
+               header('Location:http://soap.test?result=errora');
+               die();
+           }
+           /**una vez que haya pasado nuestra validacion nuestra variable request_param
           * obtendar los siguintes datos para poder enviar los datos a nuestro soap
           */
         $request_param = '<?xml version="1.0" encoding="utf-8"?>
@@ -45,18 +64,19 @@ switch ($option) {
         </soap:Body>
     </soap:Envelope>';
         break;
+        
     case 'Celsius':
         # code...
+       
         if (!is_string($option)) {
             header('Location:http://soap.test?result=error');
             die();
         }
+        
         if (!is_numeric($a)) {
             header('Location:http://soap.test?result=errora');
             die();
-        }
-
-        $request_param = '<?xml version="1.0" encoding="utf-8"?>
+        }        $request_param = '<?xml version="1.0" encoding="utf-8"?>
     <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
         xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
         <soap:Body>
@@ -102,32 +122,13 @@ if ($result === FALSE) {
 
 curl_close($ch);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <title>Resultado</title>
-</head>
-<style>
-    body {
-        background-color: #E4EAFF;
-    }
-</style>
-
-<body>
-
     <div class="flex h-screen justify-center items-center">
         <div class="text-center shadow-lg rounded-lg text-5xl">
-            <!-- ⬅️ THIS DIV WILL BE CENTERED -->
             <?php if ($option === "Celsius") {
                 echo $a . ' Celsius = ' . $data . ' Fahrenheit';
             }
             if ($option === "Fahrenheit") {
-                echo $a . ' Fahrenheit = ' . $data . 'Celsius';
+                echo $a . ' Fahrenheit = ' . $data . ' Celsius';
             }
 
             ?>

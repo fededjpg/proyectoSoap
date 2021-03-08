@@ -15,7 +15,7 @@
 
     <section class="container mx-auto py-4 shadow-xl w-1/3 text-center bg-gray-50 rounded-lg">
         <form action="soap.php" method="POST">
-            <input type="text" class="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-11/12" name="a" id="data"  required placeholder="ingresar primer valor">
+            <input type="text" class="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-11/12" name="a" id="data"  required placeholder="ingresar el numero a convertir">
             <?php if (isset($_GET['result'])) :
                 $result = $_GET['result'];
                 if ($result == "errora") : ?>
@@ -25,8 +25,9 @@
             endif;
             ?>
             <select name="select" class="px-3 mt-4 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-11/12">
-                <option value="Celsius">Grado Celsius</option>
-                <option value="Fahrenheit">Grado Fahrenheit</option>
+            <!-- <option selected disabled>Elige el conversor</option> -->
+                <option value="Celsius">Convertir Celsius a Fahrenheit</option>
+                <option value="Fahrenheit">Convertir Fahrenheit a Celsius</option>
             </select>
             <?php if (isset($_GET['result'])) :
                 $result = $_GET['result'];
@@ -42,11 +43,3 @@
 
 
 </html>
-
-
-<script>
-    let input = document.querySelector('#data');
-    input.oninvalid = function(event) {
-        event.target.setCustomValidity('Ingres un dato numerico por favor 😁.');
-    }
-</script>
